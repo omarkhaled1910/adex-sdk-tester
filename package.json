@@ -3,17 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --port 3008",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "next start --port 3000",
+    "lint": "eslint",
+    "test:load": "k6 run tests/load/auction-load-test.js",
+    "test:load:light": "k6 run --vus 10 --duration 30s tests/load/auction-load-test.js",
+    "test:load:heavy": "k6 run --vus 200 --duration 2m tests/load/auction-load-test.js",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
   },
   "dependencies": {
-    "next": "16.1.1",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "@module-federation/nextjs-mf": "^8.8.50",
+    "next": "15.5.9",
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@playwright/test": "^1.57.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
